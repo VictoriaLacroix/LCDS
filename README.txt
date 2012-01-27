@@ -97,7 +97,6 @@ Match User welcome
         X11Forwarding no
         ForceCommand internal-sftp
         PasswordAuthentication yes
-
 ------------------------------------------------------------------------------
 . Drop the `gen_slides.pl` script into the *welcome* user's home directory.
 . Create directories and set permissions as the *root* user:
@@ -119,6 +118,15 @@ chown welcome /var/www/display/images
 [source,bash]
 ------------------------------------------------------------------------------
 */10 * * * * /home/welcome/gen_slides.pl
+------------------------------------------------------------------------------
+. Webconverger displays an image on the desktop background between browser 
+  refreshes, using whatever it finds at `$HOMEPAGE/bg.png` and falling back
+  to the Webconverger logo if nothing is found there. As the *welcome* user,
+  copy your institutional logo into place:
++
+[source,bash]
+------------------------------------------------------------------------------
+cp logo.png /var/www/display/bg.png
 ------------------------------------------------------------------------------
 
 Signage update process
