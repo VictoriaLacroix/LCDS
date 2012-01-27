@@ -120,3 +120,22 @@ chown welcome /var/www/display/images
 ------------------------------------------------------------------------------
 */10 * * * * /home/welcome/gen_slides.pl
 ------------------------------------------------------------------------------
+
+Signage update process
+----------------------
+. Install http://filezilla-project.org/[FileZilla] or http://winscp.net[WinSCP]
+  so that you can use SFTP to transfer files. 
+. Set up a connection in your SFTP client to:
+  * hostname: `hostname`
+  * user name: `welcome`
+  * password: `password`
+. Transfer the new images (`.jpg`, `.jpeg`, `.png`, `.gif`) that you want into
+  the "images" folder of the "welcome" user, and remove the old files that you no
+  longer want to display. 
+
+Every 10 minutes, a script will automatically regenerate the list of images to
+display at http://hostname/display based on the contents of the
+"images" folder for the "welcome" user. 
+
+Every 15 minutes, the laptop connected to the digital sign will reload the
+web page so that it picks up any new images. 
