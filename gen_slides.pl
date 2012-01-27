@@ -76,9 +76,17 @@ sub update_pics {
     chdir($imgsrc);
     @pics = glob('*.jpg *.jpeg *.png *.gif');
     if (!@pics) {
+        # Hmm, no source images eh? Bail out.
         return 0;
     }
-    system("rm", "-f", catfile($display_dir, 'images', '*'));
+
+    # Now we can safely remove the old images
+    chdir(catdir($display_dir, 'images'));
+    my @old_pics = glob('*.jpg *.jpeg *.png *.gif');
+    foreach my $old_pic (@old_pics) {
+        system("rm", "-f", $old_pic);
+    }
+
     foreach my $pic (@pics) {
         copy(catfile($imgsrc, $pic), catfile($display_dir, 'images', $pic));
     }
@@ -104,6 +112,3 @@ my $success = update_pics();
 if ($success) {
     update_index();
 }
-
-
-
