@@ -1,0 +1,8 @@
+Some of the many things that could be done
+==========================================
+
+* Hard-coding paths in `gen_slides.pl` is a dumb thing to do. But hey, I wrote
+  this for me and my server.
+* Would be nice to be able to automatically generate slides based on some text
+  rather than forcing users to generate images that are nothing more than text
+  on a standard background.
