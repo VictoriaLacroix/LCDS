@@ -73,16 +73,15 @@ my $footer = '                          ]
 </html>'; 
 
 sub update_pics {
+    my $extensions = '*.jpg *.JPG *.jpeg *.JPEG *.png *.PNG *.gif *.GIF';
     chdir($imgsrc);
-    @pics = glob('*.jpg *.jpeg *.png *.gif');
+    @pics = glob($extensions);
     if (!@pics) {
-        # Hmm, no source images eh? Bail out.
         return 0;
     }
 
-    # Now we can safely remove the old images
     chdir(catdir($display_dir, 'images'));
-    my @old_pics = glob('*.jpg *.jpeg *.png *.gif');
+    my @old_pics = glob($extensions);
     foreach my $old_pic (@old_pics) {
         system("rm", "-f", $old_pic);
     }
