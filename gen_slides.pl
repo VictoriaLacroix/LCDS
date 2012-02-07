@@ -74,6 +74,7 @@ my $footer = '                          ]
 
 sub update_pics {
     my $extensions = '*.jpg *.JPG *.jpeg *.JPEG *.png *.PNG *.gif *.GIF';
+    my $resolution = '1920x1080'; # as consumed by 'convert' command
     chdir($imgsrc);
     @pics = glob($extensions);
     if (!@pics) {
@@ -87,7 +88,7 @@ sub update_pics {
     }
 
     foreach my $pic (@pics) {
-        copy(catfile($imgsrc, $pic), catfile($display_dir, 'images', $pic));
+        system("convert", "-resize", $resolution, catfile($imgsrc, $pic), catfile($display_dir, 'images', $pic));
     }
     return 1;
 }
