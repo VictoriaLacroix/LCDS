@@ -4,11 +4,17 @@ use warnings;
 use File::Copy;
 use File::Spec::Functions;
 
+# TODO: convert to command-line options for generic goodness
 my $imgsrc = '/home/welcome/images';
 my $display_dir= '/var/www/display';
+my $slide_interval = 10000; # display each slide for this long; 1000 = 1 second
+my $extensions = '*.jpg *.JPG *.jpeg *.JPEG *.png *.PNG *.gif *.GIF';
+my $resolution = '1920x1080'; # as consumed by 'convert' command
+
 my @pics;
 
-my $header = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+my $header = <<HEAD;
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
@@ -38,12 +44,12 @@ my $header = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "ht
 
                 <script type="text/javascript">
 
-                        jQuery(function($){
+                        jQuery(function(\$){
 
-                                $.supersized({
+                                \$.supersized({
 
                                         // Functionality
-                                        slide_interval          :   6000,               // Length between transitions
+                                        slide_interval          :   $slide_interval,               // Length between transitions
                                         transition              :   3,                  // 0-None, 1-Fade, 2-Slide Top, 3-Slide Right, 4-Slide Bottom, 5-Slide Left, 6-Carousel Right, 7-Carousel Left
                                         transition_speed                :       700,            // Speed of transition
 
@@ -51,8 +57,10 @@ my $header = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "ht
                                         slide_links                             :       "blank",        // Individual links for each slide (Options: false, "num", "name", "blank")
                                         slides  : [
 ';
+HEAD
 
-my $footer = '                          ]
+my $footer = <<FOOT;
+                          ]
 
                                 });
                     });
@@ -70,11 +78,10 @@ my $footer = '                          ]
 <body>
 
 </body>
-</html>'; 
+</html>
+FOOT
 
 sub update_pics {
-    my $extensions = '*.jpg *.JPG *.jpeg *.JPEG *.png *.PNG *.gif *.GIF';
-    my $resolution = '1920x1080'; # as consumed by 'convert' command
     chdir($imgsrc);
     @pics = glob($extensions);
     if (!@pics) {
