@@ -9,7 +9,7 @@ my $imgsrc = '/home/welcome/images';
 my $display_dir= '/var/www/display';
 my $slide_interval = 10000; # display each slide for this long; 1000 = 1 second
 my $extensions = '*.jpg *.JPG *.jpeg *.JPEG *.png *.PNG *.gif *.GIF';
-my $resolution = '1920x1080'; # as consumed by 'convert' command
+my $resolution = '1280x720'; # as consumed by 'convert' command
 
 my @pics;
 
@@ -49,6 +49,7 @@ my $header = <<HEAD;
                                 \$.supersized({
 
                                         // Functionality
+                                        fit_always              : 1, // scale down big images, scale up small images
                                         slide_interval          :   $slide_interval,               // Length between transitions
                                         transition              :   3,                  // 0-None, 1-Fade, 2-Slide Top, 3-Slide Right, 4-Slide Bottom, 5-Slide Left, 6-Carousel Right, 7-Carousel Left
                                         transition_speed                :       700,            // Speed of transition
