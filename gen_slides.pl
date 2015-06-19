@@ -3,11 +3,11 @@ use strict;
 use warnings;
 use File::Copy;
 use File::Spec::Functions;
+use Cwd;
 
-# TODO: convert to command-line options for generic goodness
-my $imgsrc = '/home/welcome/images';
-my $display_dir= '/var/www/display';
-my $slide_interval = 10000; # display each slide for this long; 1000 = 1 second
+my $imgsrc = $ARGV[0] ? catdir(cwd(), $ARGV[0]) : '/home/welcome/images';
+my $display_dir = $ARGV[1] ? catdir(cwd(), $ARGV[1]) : '/var/www/display';
+my $slide_interval = $ARGV[2] ? $ARGV[2] : 10000; # display each slide for this long; 1000 = 1 second
 my $extensions = '*.jpg *.JPG *.jpeg *.JPEG *.png *.PNG *.gif *.GIF';
 my $resolution = '1280x720'; # as consumed by 'convert' command
 
