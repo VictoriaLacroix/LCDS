@@ -20,7 +20,7 @@ my $header = <<HEAD;
 
         <!--
                 Supersized - Fullscreen Slideshow jQuery Plugin
-                Version : 3.2.6
+                Version : 3.2.7
                 Site    : www.buildinternet.com/project/supersized
 
                 Author  : Sam Dunn
@@ -39,7 +39,7 @@ my $header = <<HEAD;
                 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
                 <script type="text/javascript" src="js/jquery.easing.min.js"></script>
 
-                <script type="text/javascript" src="js/supersized.3.2.6.min.js"></script>
+                <script type="text/javascript" src="js/supersized.3.2.7.min.js"></script>
                 <script type="text/javascript" src="theme/supersized.shutter.min.js"></script>
 
                 <script type="text/javascript">
